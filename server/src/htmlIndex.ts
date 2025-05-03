@@ -4,7 +4,7 @@ import fs from 'fs'
 
 // @return index.html as string
 function htmlIndex() {
-     // '.' resolves to "spacetrek-webgame/" for some reason. 
+     // '.' resolves to "spaceidle-webgame/" for some reason. 
      // TODO: Find out why it resolves to that instead of this directory
     const TEMPLATE_PATH = './server/templates/index.ejs'
     const params = { location: 'World' }
