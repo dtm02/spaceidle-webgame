@@ -4,6 +4,7 @@ import htmlIndex from './htmlIndex.ts'
 import { ACCESS_PORT, HOST_ADDRESS } from '../../shared/globals.ts'
 import fs from 'fs'
 import { resolve } from 'path'
+import { WebSocketServer } from 'ws';
 
 function getFile(atUrl) {
     const FILE_PATH = './client' + atUrl
@@ -11,6 +12,14 @@ function getFile(atUrl) {
     const descriptor = fs.readFileSync('./client' + atUrl)
     return descriptor.toString()
 }
+
+const wss = new WebSocketServer({ port: 8080 });
+
+wss.on('connection', function connection(ws) {
+    ws.on('message', (data, binary) => {
+        console.log(data.toString())
+    })
+});
 
 const server: Server<typeof IncomingMessage, typeof ServerResponse> 
     = createServer((request: IncomingMessage, response: ServerResponse<IncomingMessage>) => {
